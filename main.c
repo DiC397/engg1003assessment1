@@ -1,23 +1,29 @@
 #include<stdio.h>
-#include<conio.h>
+#include<string.h>
  
-void main()
+int main(void)
 {
-    char message[1000], c[27], ct[1000], m;  //maximum number of code to be entered
+    char message[1000], c[1000], ct[1000], m;  //maximum number of code to be entered
 	int i;
 	int j;
 	int index;
 	int shift;   //allows input value for number of shift of letters up to 26
 	int option;
-    printf("1 is decryption with rotation cipher \n2 is encryption with rotation cipher \n3 is decryption with subsitution cipher \n4 is encrpytion with substitution cipher \nChoose from case 1-6: ");
-    scanf("%d", &option);
-    getchar();    //allows use of gets rather than just scanf
-
+    printf("1 is decryption with rotation cipher \n2 is encryption with rotation cipher \n3 is decryption with subsitution cipher \n4 is encrpytion with substitution cipher \nChoose from case 1-4: \n");
+    fflush(stdout);
+    scanf(" %d", &option);
+    //getchar();    //allows use of gets rather than just scanf
+        for (i=0; i<26; i++) {
+            ct[i]=0;
+        }
+        
     if(option==1)
     {
-    	printf("\nEnter a message to decrypt: ");
-    	gets(message);  //gets allows readings of single strings on keyboard
-    	printf("\nEnter number of shift: ");  //selection of number of rotation
+    	printf("\nEnter a message to decrypt: \n");
+    	fflush(stdout);
+    	scanf(" %[^\n]s",message);  //gets allows readings of single strings on keyboard
+    	printf("Enter number of shift: \n");  //selection of number of rotation
+    	fflush(stdout);
     	scanf("%d", &shift);
     	
     	for(i=0; message[i] !='\0'; ++i)
@@ -40,13 +46,15 @@ void main()
     		}
     	}
     	
-    	printf("\nDecrypted message: %s", message);
-    	
+    	printf("\nDecrypted message: %s \n", message);
+    	printf("\n\n\n");
     } else if (option==2)
     {
-    	printf("\nEnter a message to encrypt: ");
-    	gets(message);
-    	printf("\nEnter number of shift: ");
+    	printf("\nEnter a message to encrypt: \n");
+    	fflush(stdout);
+    	scanf(" %[^\n]s ",message);
+    	printf("\nEnter number of shift: \n");
+    	fflush(stdout);
     	scanf("%d", &shift);
     	
     	for(i=0; message[i] !='\0'; ++i)
@@ -70,20 +78,22 @@ void main()
 
     	}
     		
-    	printf("\nEncrpyted message: %s", message);
+    	printf("\nEncrpyted message: %s \n", message);
+    	printf("\n\n\n");
     } else if(option==3)
     {
-        printf("\nEnter decrypted message: ");
-        gets(message);
+        
+        printf(" \nEnter decrypted message: \n");
+        fflush(stdout);
+        scanf(" %[^\n]s",message);
         
         printf("\nEnter Key From A to Z: \n");
-        
+        printf("ABCDEFGHIJKLMNOPQRSTUVWXYZ\n");
+        fflush(stdout);
+        scanf(" %[^\n]s", c);
+
         for(i = 0; i < 26; i++)
         {
-            printf("%c-", i + 65);  //%c is character and 65 is from ASCII table for letters from decimal.
-            c[i] = getch(); //getch() changes numbers into letters and allows no buffer
-            printf("%c , ", c[i]);  //for input of substitution letters
- 
             if (c[i]<='z' && c[i]>='a') {  // check if lowercase
                 c[i]=c[i]-'a'+'A'; // convert to uppercase
             }
@@ -104,9 +114,6 @@ void main()
             } else {
                 ct[i] = message[i]; // stores character from message if not a capital letter 
             }
-            
-            //printf("%d", index);
-            //printf("%c\n", c[index]);
         }
       
         printf("\nCipher message is: %c", ct[i]);
@@ -114,19 +121,21 @@ void main()
         {
             printf("%c", ct[i]);
         }
-        
+        printf("\n\n\n");
     } else if(option==4)
     {
-        printf("\nEnter encrypted message: ");
-        gets(message);
+        
+        printf(" \nEnter decrypted message: \n");
+        fflush(stdout);
+        scanf(" %[^\n]s",message);
         
         printf("\nEnter Key From A to Z: \n");
+        printf("ABCDEFGHIJKLMNOPQRSTUVWXYZ\n");
+        fflush(stdout);
+        scanf(" %[^\n]s", c);
+
         for(i = 0; i < 26; i++)
         {
-            printf("%c-", i + 65);  //%c is character and 65 is from ASCII table for letters from decimal.
-            c[i] = getch(); //getch() changes numbers into letters and allows no buffer
-            printf("%c , ", c[i]);  //for input of substitution letters
-            
             if (c[i]<='z' && c[i]>='a') {  // check if lowercase
                 c[i]=c[i]-'a'+'A'; // convert to uppercase
             }
@@ -152,6 +161,7 @@ void main()
         {
             printf("%c", ct[i]);
         }
+        printf("\n\n\n");
     }
     	return 0;
 }
